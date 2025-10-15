@@ -155,11 +155,33 @@ class Editor extends React.Component<IProps, IState> {
         const editorData: EditorData = EditorActions.getEditorData(event);
         EditorModel.mousePositionOnViewPortContent = CanvasUtil.getMousePositionOnCanvasFromEvent(event, EditorModel.canvas);
         EditorModel.primaryRenderingEngine.update(editorData);
-        
-        if (this.props.imageDragMode) {
+
+        // Decide action by mouse button: left button => drawing/support engine, right button => panning
+        // event.button: 0 = left, 2 = right
+        const mouseEvent = event as MouseEvent;
+        if (mouseEvent.type === EventType.MOUSE_DOWN) {
+            if (mouseEvent.button === 2) {
+                // start panning
+                EditorModel.currentInteraction = 'pan';
+            } else if (mouseEvent.button === 0) {
+                // start support interaction (drawing)
+                EditorModel.currentInteraction = 'support';
+            }
+        }
+
+        // route updates based on current interaction; respect explicit disabling of viewPort actions
+        if (EditorModel.currentInteraction === 'pan' && !EditorModel.viewPortActionsDisabled) {
             EditorModel.viewPortHelper.update(editorData);
-        } else {
+        } else if (EditorModel.currentInteraction === 'support' || (!EditorModel.currentInteraction && !this.props.imageDragMode)) {
             EditorModel.supportRenderingEngine && EditorModel.supportRenderingEngine.update(editorData);
+        } else if (!EditorModel.currentInteraction && this.props.imageDragMode) {
+            // fallback: when imageDragMode is enabled and no explicit interaction set, allow viewPort helper
+            EditorModel.viewPortHelper.update(editorData);
+        }
+
+        // On mouse up clear current interaction
+        if (mouseEvent.type === EventType.MOUSE_UP) {
+            EditorModel.currentInteraction = null;
         }
 
         !this.props.activePopupType && EditorActions.updateMousePositionIndicator(event);

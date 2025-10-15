@@ -23,6 +23,8 @@ export class EditorModel {
     public static viewPortActionsDisabled: boolean = false;
     public static mousePositionOnViewPortContent: IPoint;
     public static viewPortSize: ISize;
+    // Interaction currently in progress: 'pan' | 'support' | null
+    public static currentInteraction: string = null;
 
     // x and y describe the dimension of the margin that remains constant regardless of the scale of the image
     // width and height describes the render image size for 100% scale
