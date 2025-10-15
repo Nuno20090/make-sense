@@ -1,5 +1,5 @@
-import * as cocoSsd from '@tensorflow-models/coco-ssd';
-import {DetectedObject, ObjectDetection} from '@tensorflow-models/coco-ssd';
+// TensorFlow-based object detection removed. Provide a no-op stub to preserve API.
+import {DetectedObject} from '../interfaces/StubDetectedObject';
 import {store} from '../index';
 import {updateSSDObjectDetectorStatus} from '../store/ai/actionCreators';
 import {LabelType} from '../data/enums/LabelType';
@@ -12,54 +12,14 @@ import {NotificationsDataMap} from '../data/info/NotificationsData';
 import {Notification} from '../data/enums/Notification';
 
 export class SSDObjectDetector {
-    private static model: ObjectDetection;
-
+    // No-op implementation: model functionality removed but API preserved.
     public static loadModel(callback?: () => any) {
-        cocoSsd
-            .load()
-            .then((model: ObjectDetection) => {
-                SSDObjectDetector.model = model;
-                store.dispatch(updateSSDObjectDetectorStatus(true));
-                store.dispatch(updateActiveLabelType(LabelType.RECT));
-                const activeLabelType: LabelType = LabelsSelector.getActiveLabelType();
-                if (activeLabelType === LabelType.RECT) {
-                    AISSDObjectDetectionActions.detectRectsForActiveImage();
-                }
-                if (callback) {
-                    callback();
-                }
-            })
-            .catch((error) => {
-                // TODO: Introduce central logging system like Sentry
-                store.dispatch(
-                    submitNewNotification(
-                        NotificationUtil.createErrorNotification(
-                            NotificationsDataMap[Notification.MODEL_DOWNLOAD_ERROR]
-                        )
-                    )
-                )
-            })
+        store.dispatch(updateSSDObjectDetectorStatus(false));
+        if (callback) callback();
     }
 
-    public static predict(image: HTMLImageElement, callback?: (predictions: DetectedObject[]) => any) {
-        if (!SSDObjectDetector.model) return;
-
-        SSDObjectDetector.model
-            .detect(image)
-            .then((predictions: DetectedObject[]) => {
-                if (callback) {
-                    callback(predictions)
-                }
-            })
-            .catch((error) => {
-                // TODO: Introduce central logging system like Sentry
-                store.dispatch(
-                    submitNewNotification(
-                        NotificationUtil.createErrorNotification(
-                            NotificationsDataMap[Notification.MODEL_INFERENCE_ERROR]
-                        )
-                    )
-                )
-            })
+    public static predict(_image: HTMLImageElement, callback?: (predictions: DetectedObject[]) => any) {
+        // Return empty prediction list
+        if (callback) callback([]);
     }
 }

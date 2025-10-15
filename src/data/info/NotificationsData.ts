@@ -20,8 +20,8 @@ export const NotificationsDataMap: ExportFormatDataMap = {
     },
     [Notification.MODEL_DOWNLOAD_ERROR]: {
         header: 'Model could not be downloaded',
-        description: 'Looks like we ware unable to download tensorflow.js model from external server. Make sure that ' +
-            'you are connected to internet and try again.'
+            description: 'Looks like we were unable to download AI model from external server. Make sure that ' +
+                'you are connected to internet and try again.'
     },
     [Notification.MODEL_INFERENCE_ERROR]: {
         header: 'Inference failed',
@@ -30,8 +30,8 @@ export const NotificationsDataMap: ExportFormatDataMap = {
     },
     [Notification.MODEL_LOAD_ERROR]: {
         header: 'Model could not be loaded',
-        description: 'Looks like we ware unable to load your tensorflow.js model from uploaded files. Make sure that ' +
-            'you uploaded all model shard files. Please re-upload all model files once again.'
+            description: 'Looks like we were unable to load your AI model from uploaded files. Make sure that ' +
+                'you uploaded all model shard files. Please re-upload all model files once again.'
     },
     [Notification.LABELS_FILE_UPLOAD_ERROR]: {
         header: 'Labels file was not uploaded',

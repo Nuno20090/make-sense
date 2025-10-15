@@ -1,4 +1,4 @@
-import {DetectedObject} from '@tensorflow-models/coco-ssd';
+import {DetectedObject} from '../../interfaces/StubDetectedObject';
 import {ImageData, LabelName, LabelRect} from '../../store/labels/types';
 import {LabelsSelector} from '../../store/selectors/LabelsSelector';
 import { v4 as uuidv4 } from 'uuid';

@@ -25,15 +25,7 @@ export default ({ mode }: UserConfig): UserConfigExport => {
             runtime: ['react', 'react-is'],
             'runtime-dom': ['react-dom'],
 
-            ai: ['@tensorflow/tfjs',
-              '@tensorflow/tfjs-backend-cpu',
-              '@tensorflow/tfjs-backend-webgl',
-              '@tensorflow/tfjs-core',
-              '@tensorflow/tfjs-node'],
-            models: [
-              '@tensorflow-models/coco-ssd',
-              '@tensorflow-models/posenet',
-            ],
+            // TensorFlow-related chunks removed
             ui: ['@mui/material', '@mui/system'],
             moment: ['moment']
 

@@ -1,5 +1,5 @@
 import {PoseDetector} from '../../ai/PoseDetector';
-import {Keypoint, Pose} from '@tensorflow-models/posenet';
+import {Pose, Keypoint} from '../../interfaces/StubPose';
 import {ImageData, LabelName, LabelPoint} from '../../store/labels/types';
 import {LabelsSelector} from '../../store/selectors/LabelsSelector';
 import {ImageRepository} from '../imageRepository/ImageRepository';
