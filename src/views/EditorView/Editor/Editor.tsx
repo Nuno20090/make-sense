@@ -172,7 +172,9 @@ class Editor extends React.Component<IProps, IState> {
         // route updates based on current interaction; respect explicit disabling of viewPort actions
         if (EditorModel.currentInteraction === 'pan' && !EditorModel.viewPortActionsDisabled) {
             EditorModel.viewPortHelper.update(editorData);
-        } else if (EditorModel.currentInteraction === 'support' || (!EditorModel.currentInteraction && !this.props.imageDragMode)) {
+        } else if (EditorModel.currentInteraction === 'support' || (!EditorModel.currentInteraction && !this.props.imageDragMode && mouseEvent.type !== EventType.MOUSE_DOWN)) {
+            // Only route to support rendering when an explicit support interaction is active,
+            // or when not on an initial MOUSE_DOWN (to avoid middle-button starting drawing).
             EditorModel.supportRenderingEngine && EditorModel.supportRenderingEngine.update(editorData);
         } else if (!EditorModel.currentInteraction && this.props.imageDragMode) {
             // fallback: when imageDragMode is enabled and no explicit interaction set, allow viewPort helper
