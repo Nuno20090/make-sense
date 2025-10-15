@@ -112,8 +112,8 @@ const RectLabelsList: React.FC<IProps> = (
         >
             {imageData.labelRects.filter((labelRect: LabelRect) => labelRect.status === LabelStatus.ACCEPTED).length === 0 ?
                 <EmptyLabelList
-                    labelBefore={'draw your first bounding box'}
-                    labelAfter={'no labels created for this image yet'}
+                    labelBefore={'Adicione um retângulo na zona do defeito'}
+                    labelAfter={'Ainda sem defeitos marcados'}
                 /> :
                 <Scrollbars>
                     <div

@@ -189,8 +189,13 @@ class Editor extends React.Component<IProps, IState> {
     };
 
     private handleZoom = (event: WheelEvent) => {
-        if (event.ctrlKey || (PlatformModel.isMac && event.metaKey)) {
-            const scrollSign: number = Math.sign(event.deltaY);
+        // Inverted behavior: default wheel gesture -> zoom, holding Ctrl (or Meta on Mac) -> scroll
+        const isModifierPressed = event.ctrlKey || (PlatformModel.isMac && event.metaKey);
+        const scrollSign: number = Math.sign(event.deltaY);
+
+        if (!isModifierPressed) {
+            // zoom by default
+            event.preventDefault();
             if ((PlatformModel.isMac && scrollSign === -1) || (!PlatformModel.isMac && scrollSign === 1)) {
                 ViewPortActions.zoomOut();
             }
@@ -198,6 +203,8 @@ class Editor extends React.Component<IProps, IState> {
                 ViewPortActions.zoomIn();
             }
         }
+
+        // when modifier pressed, allow default scroll behavior (do not preventDefault)
         EditorModel.mousePositionOnViewPortContent = CanvasUtil.getMousePositionOnCanvasFromEvent(event, EditorModel.canvas);
     };
 
