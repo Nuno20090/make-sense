@@ -9,26 +9,14 @@ export class ImageDataUtil {
             id: uuidv4(),
             fileData,
             loadStatus: false,
-            labelRects: [],
-            labelPoints: [],
-            labelLines: [],
-            labelPolygons: [],
-            labelNameIds: [],
-            isVisitedByYOLOObjectDetector: false,
-            isVisitedBySSDObjectDetector: false,
-            isVisitedByPoseDetector: false,
-            isVisitedByRoboflowAPI: false
+            labelRects: []
         }
     }
 
     public static cleanAnnotations(item: ImageData): ImageData {
         return {
             ...item,
-            labelRects: [],
-            labelPoints: [],
-            labelLines: [],
-            labelPolygons: [],
-            labelNameIds: []
+            labelRects: []
         }
     }
 

@@ -21,13 +21,11 @@ import {ContextManager} from '../../../logic/context/ContextManager';
 import {ContextType} from '../../../data/enums/ContextType';
 import Scrollbars from 'react-custom-scrollbars-2';
 import {ViewPortActions} from '../../../logic/actions/ViewPortActions';
-import {PlatformModel} from '../../../staticModels/PlatformModel';
 import LabelControlPanel from '../LabelControlPanel/LabelControlPanel';
 import {IPoint} from '../../../interfaces/IPoint';
 import {RenderEngineUtil} from '../../../utils/RenderEngineUtil';
 import {LabelStatus} from '../../../data/enums/LabelStatus';
 import {isEqual} from 'lodash';
-import {AIActions} from '../../../logic/actions/AIActions';
 
 interface IProps {
     size: ISize;
@@ -86,7 +84,7 @@ class Editor extends React.Component<IProps, IState> {
 
         if (prevProps.activeLabelType !== activeLabelType) {
             EditorActions.swapSupportRenderingEngine(activeLabelType);
-            imageData && AIActions.detect(imageData.id, ImageRepository.getById(imageData.id));
+            //imageData && AIActions.detect(imageData.id, ImageRepository.getById(imageData.id));
         }
 
         this.updateModelAndRender();
@@ -119,7 +117,7 @@ class Editor extends React.Component<IProps, IState> {
 
         if (imageData.loadStatus) {
             EditorActions.setActiveImage(ImageRepository.getById(imageData.id));
-            AIActions.detect(imageData.id, ImageRepository.getById(imageData.id));
+            //AIActions.detect(imageData.id, ImageRepository.getById(imageData.id));
             this.updateModelAndRender()
         }
         else {
@@ -138,7 +136,7 @@ class Editor extends React.Component<IProps, IState> {
         this.props.updateImageDataById(imageData.id, imageData);
         ImageRepository.storeImage(imageData.id, image);
         EditorActions.setActiveImage(image);
-        AIActions.detect(imageData.id, image);
+        //AIActions.detect(imageData.id, image);
         EditorActions.setLoadingStatus(false);
         this.updateModelAndRender()
     };
@@ -197,16 +195,16 @@ class Editor extends React.Component<IProps, IState> {
 
     private handleZoom = (event: WheelEvent) => {
         // Inverted behavior: default wheel gesture -> zoom, holding Ctrl (or Meta on Mac) -> scroll
-        const isModifierPressed = event.ctrlKey || (PlatformModel.isMac && event.metaKey);
+        const isModifierPressed = event.ctrlKey;
         const scrollSign: number = Math.sign(event.deltaY);
 
         if (!isModifierPressed) {
             // zoom by default
             event.preventDefault();
-            if ((PlatformModel.isMac && scrollSign === -1) || (!PlatformModel.isMac && scrollSign === 1)) {
+            if (scrollSign === 1) {
                 ViewPortActions.zoomOut();
             }
-            else if ((PlatformModel.isMac && scrollSign === 1) || (!PlatformModel.isMac && scrollSign === -1)) {
+            else if (scrollSign === -1) {
                 ViewPortActions.zoomIn();
             }
         }

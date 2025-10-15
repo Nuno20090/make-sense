@@ -1,5 +1,5 @@
 export enum LabelStatus {
     ACCEPTED = "ACCEPTED",
-    REJECTED = "REJECTED",
-    UNDECIDED = "UNDECIDED"
+    //REJECTED = "REJECTED",
+    //UNDECIDED = "UNDECIDED"
 }

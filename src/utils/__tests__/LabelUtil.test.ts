@@ -1,6 +1,6 @@
 import { IRect } from '../../interfaces/IRect';
 import { LabelUtil } from '../LabelUtil';
-import {LabelPoint, LabelPolygon, LabelRect} from '../../store/labels/types';
+import { LabelRect } from '../../store/labels/types';
 import {LabelStatus} from '../../data/enums/LabelStatus';
 import {IPoint} from '../../interfaces/IPoint';
 
@@ -36,61 +36,3 @@ describe('LabelUtil createLabelRect method', () => {
     });
 });
 
-describe('LabelUtil createLabelPolygon method', () => {
-    it('return correct LabelPolygon object', () => {
-        // given
-        const labelId: string = '1';
-        const vertices: IPoint[] = [
-            {
-                x: 100,
-                y: 100
-            },
-            {
-                x: 100,
-                y: 200
-            },
-            {
-                x: 200,
-                y: 100
-            }
-        ];
-
-        // when
-        const result = LabelUtil.createLabelPolygon(labelId, vertices);
-
-        // then
-        const expectedResult: LabelPolygon = {
-            id: mockUUID,
-            labelId,
-            vertices,
-            isVisible: true
-        }
-        expect(result).toEqual(expectedResult);
-    });
-});
-
-describe('LabelUtil createLabelPoint method', () => {
-    it('return correct LabelPoint object', () => {
-        // given
-        const labelId: string = '1';
-        const point: IPoint = {
-            x: 100,
-            y: 100
-        };
-
-        // when
-        const result = LabelUtil.createLabelPoint(labelId, point);
-
-        // then
-        const expectedResult: LabelPoint = {
-            id: mockUUID,
-            labelId,
-            point,
-            isVisible: true,
-            isCreatedByAI: false,
-            status: LabelStatus.ACCEPTED,
-            suggestedLabel: null
-        }
-        expect(result).toEqual(expectedResult);
-    });
-});

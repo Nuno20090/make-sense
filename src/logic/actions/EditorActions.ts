@@ -1,25 +1,22 @@
-import {LabelType} from "../../data/enums/LabelType";
-import {EditorModel} from "../../staticModels/EditorModel";
-import {RectRenderEngine} from "../render/RectRenderEngine";
-import {PointRenderEngine} from "../render/PointRenderEngine";
-import {PolygonRenderEngine} from "../render/PolygonRenderEngine";
-import {IRect} from "../../interfaces/IRect";
-import {RectUtil} from "../../utils/RectUtil";
-import {EditorData} from "../../data/EditorData";
-import {CanvasUtil} from "../../utils/CanvasUtil";
 import React from "react";
-import {IPoint} from "../../interfaces/IPoint";
-import {DrawUtil} from "../../utils/DrawUtil";
-import {PrimaryEditorRenderEngine} from "../render/PrimaryEditorRenderEngine";
-import {ContextManager} from "../context/ContextManager";
-import {PointUtil} from "../../utils/PointUtil";
-import {ViewPortActions} from "./ViewPortActions";
-import {ISize} from "../../interfaces/ISize";
-import {ImageUtil} from "../../utils/ImageUtil";
-import {GeneralSelector} from "../../store/selectors/GeneralSelector";
-import {ViewPortHelper} from "../helpers/ViewPortHelper";
-import {CustomCursorStyle} from "../../data/enums/CustomCursorStyle";
-import {LineRenderEngine} from "../render/LineRenderEngine";
+import { EditorData } from "../../data/EditorData";
+import { CustomCursorStyle } from "../../data/enums/CustomCursorStyle";
+import { LabelType } from "../../data/enums/LabelType";
+import { IPoint } from "../../interfaces/IPoint";
+import { IRect } from "../../interfaces/IRect";
+import { ISize } from "../../interfaces/ISize";
+import { EditorModel } from "../../staticModels/EditorModel";
+import { GeneralSelector } from "../../store/selectors/GeneralSelector";
+import { CanvasUtil } from "../../utils/CanvasUtil";
+import { DrawUtil } from "../../utils/DrawUtil";
+import { ImageUtil } from "../../utils/ImageUtil";
+import { PointUtil } from "../../utils/PointUtil";
+import { RectUtil } from "../../utils/RectUtil";
+import { ContextManager } from "../context/ContextManager";
+import { ViewPortHelper } from "../helpers/ViewPortHelper";
+import { PrimaryEditorRenderEngine } from "../render/PrimaryEditorRenderEngine";
+import { RectRenderEngine } from "../render/RectRenderEngine";
+import { ViewPortActions } from "./ViewPortActions";
 
 export class EditorActions {
 
@@ -32,24 +29,15 @@ export class EditorActions {
             case LabelType.RECT:
                 EditorModel.supportRenderingEngine = new RectRenderEngine(EditorModel.canvas);
                 break;
-            case LabelType.POINT:
-                EditorModel.supportRenderingEngine = new PointRenderEngine(EditorModel.canvas);
-                break;
-            case LabelType.LINE:
-                EditorModel.supportRenderingEngine = new LineRenderEngine(EditorModel.canvas);
-                break;
-            case LabelType.POLYGON:
-                EditorModel.supportRenderingEngine = new PolygonRenderEngine(EditorModel.canvas);
-                break;
             default:
                 EditorModel.supportRenderingEngine = null;
                 break;
         }
-    };
+    }
 
     public static swapSupportRenderingEngine(activeLabelType: LabelType) {
         EditorActions.mountSupportRenderingEngine(activeLabelType);
-    };
+    }
 
     public static mountRenderEnginesAndHelpers(activeLabelType: LabelType) {
         EditorModel.viewPortHelper = new ViewPortHelper();
@@ -105,7 +93,7 @@ export class EditorActions {
     // HELPERS
     // =================================================================================================================
 
-    public static updateMousePositionIndicator(event: React.MouseEvent<HTMLCanvasElement, MouseEvent> | MouseEvent) {
+    public static updateMousePositionIndicator(event: React.MouseEvent<HTMLCanvasElement, MouseEvent> | MouseEvent) {
         if (!EditorModel.image || !EditorModel.canvas) {
             EditorModel.mousePositionIndicator.style.display = "none";
             EditorModel.cursor.style.display = "none";

@@ -18,21 +18,6 @@ export const NotificationsDataMap: ExportFormatDataMap = {
         description: 'Looks like not all your label names are unique. Unique names are necessary to guarantee correct' +
             ' data export when you complete your work. Make your names unique and try again.'
     },
-    [Notification.MODEL_DOWNLOAD_ERROR]: {
-        header: 'Model could not be downloaded',
-            description: 'Looks like we were unable to download AI model from external server. Make sure that ' +
-                'you are connected to internet and try again.'
-    },
-    [Notification.MODEL_INFERENCE_ERROR]: {
-        header: 'Inference failed',
-        description: 'Looks like we were unable to run inference of your image. Please help us improve Make Sense ' +
-            'and let us know.'
-    },
-    [Notification.MODEL_LOAD_ERROR]: {
-        header: 'Model could not be loaded',
-            description: 'Looks like we were unable to load your AI model from uploaded files. Make sure that ' +
-                'you uploaded all model shard files. Please re-upload all model files once again.'
-    },
     [Notification.LABELS_FILE_UPLOAD_ERROR]: {
         header: 'Labels file was not uploaded',
         description: 'Looks like you forgot to upload text file containing list of detected classes names. We need ' +
@@ -48,14 +33,5 @@ export const NotificationsDataMap: ExportFormatDataMap = {
         description: 'Missing or invalid annotations provided during import. Please fix the files selected ' +
             'to import and try again.',
     },
-    [Notification.UNSUPPORTED_INFERENCE_SERVER_MESSAGE]: {
-        header: 'Selected inference server is not yet supported',
-        description: 'Integration with selected inference server is still under construction. Stay tuned for more ' +
-            'updates on our GitHub.'
-    },
-    [Notification.ROBOFLOW_INFERENCE_SERVER_ERROR]: {
-        header: 'Roboflow connection failed',
-        description: 'Looks like we ware unable to connect to your Roboflow model. Please, make sure that the model ' +
-            'specification and Roboflow API key, are correct.'
-    }
+    
 }

@@ -4,9 +4,9 @@ import {store} from '../index';
 import {CustomCursorStyle} from '../data/enums/CustomCursorStyle';
 import {updateCustomCursorStyle} from '../store/general/actionCreators';
 import {IPoint} from '../interfaces/IPoint';
+import {ILine} from '../interfaces/ILine';
 import {PointUtil} from './PointUtil';
 import {IRect} from '../interfaces/IRect';
-import {ILine} from '../interfaces/ILine';
 import {LineUtil} from './LineUtil';
 import {PolygonUtil} from './PolygonUtil';
 
@@ -32,12 +32,12 @@ export class RenderEngineUtil {
         return polygon.map((point: IPoint) => RenderEngineUtil.transferPointFromImageToViewPortContent(point, data));
     }
 
-    public static transferLineFromImageToViewPortContent(line: ILine, data: EditorData): ILine {
-        return {
-            start: RenderEngineUtil.transferPointFromImageToViewPortContent(line.start, data),
-            end: RenderEngineUtil.transferPointFromImageToViewPortContent(line.end, data)
-        }
-    }
+    //public static transferLineFromImageToViewPortContent(line: ILine, data: EditorData): ILine {
+    //    return {
+    //        start: RenderEngineUtil.transferPointFromImageToViewPortContent(line.start, data),
+    //        end: RenderEngineUtil.transferPointFromImageToViewPortContent(line.end, data)
+    //    }
+    //}
 
     public static transferPointFromViewPortContentToImage(point: IPoint, data: EditorData): IPoint {
         const scale = RenderEngineUtil.calculateImageScale(data);
@@ -48,12 +48,12 @@ export class RenderEngineUtil {
         return polygon.map((point: IPoint) => RenderEngineUtil.transferPointFromViewPortContentToImage(point, data));
     }
 
-    public static transferLineFromViewPortContentToImage(line: ILine, data: EditorData): ILine {
-        return {
-            start: RenderEngineUtil.transferPointFromViewPortContentToImage(line.start, data),
-            end: RenderEngineUtil.transferPointFromViewPortContentToImage(line.end, data)
-        }
-    }
+    //public static transferLineFromViewPortContentToImage(line: ILine, data: EditorData): ILine {
+    //    return {
+    //        start: RenderEngineUtil.transferPointFromViewPortContentToImage(line.start, data),
+    //        end: RenderEngineUtil.transferPointFromViewPortContentToImage(line.end, data)
+    //    }
+    //}
 
     public static transferRectFromViewPortContentToImage(rect: IRect, data: EditorData): IRect {
         const scale = RenderEngineUtil.calculateImageScale(data);

@@ -11,9 +11,7 @@ import { ImageButton } from '../../Common/ImageButton/ImageButton';
 import { ViewPortActions } from '../../../logic/actions/ViewPortActions';
 import { LabelsSelector } from '../../../store/selectors/LabelsSelector';
 import { LabelType } from '../../../data/enums/LabelType';
-import { AISelector } from '../../../store/selectors/AISelector';
 import { ISize } from '../../../interfaces/ISize';
-import { AIActions } from '../../../logic/actions/AIActions';
 import { Fade, styled, Tooltip, tooltipClasses, TooltipProps } from '@mui/material';
 const BUTTON_SIZE: ISize = { width: 30, height: 30 };
 const BUTTON_PADDING: number = 10;
@@ -102,13 +100,6 @@ const EditorTopNavigationBar: React.FC<IProps> = (
         updateCrossHairVisibleStatusAction(!crossHairVisible);
     };
 
-    const withAI = (
-        (activeLabelType === LabelType.RECT && AISelector.isAISSDObjectDetectorModelLoaded()) ||
-        (activeLabelType === LabelType.RECT && AISelector.isAIYOLOObjectDetectorModelLoaded()) ||
-        (activeLabelType === LabelType.RECT && AISelector.isRoboflowAPIModelLoaded()) ||
-        (activeLabelType === LabelType.POINT && AISelector.isAIPoseDetectorModelLoaded())
-    )
-
     return (
         <div className={getClassName()}>
             <div className='ButtonWrapper'>
@@ -181,30 +172,6 @@ const EditorTopNavigationBar: React.FC<IProps> = (
                     )
                 }
             </div>
-            {withAI && <div className='ButtonWrapper'>
-                    {
-                        getButtonWithTooltip(
-                            'accept-all',
-                            'accept all proposed detections',
-                            'ico/accept-all.png',
-                            'accept-all',
-                            false,
-                            undefined,
-                            () => AIActions.acceptAllSuggestedLabels(LabelsSelector.getActiveImageData())
-                        )
-                    }
-                    {
-                        getButtonWithTooltip(
-                            'reject-all',
-                            'reject all proposed detections',
-                            'ico/reject-all.png',
-                            'reject-all',
-                            false,
-                            undefined,
-                            () => AIActions.rejectAllSuggestedLabels(LabelsSelector.getActiveImageData())
-                        )
-                    }
-                </div>}
         </div>
     );
 };

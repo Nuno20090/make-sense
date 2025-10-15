@@ -71,7 +71,7 @@ export class PrimaryEditorRenderEngine extends BaseRenderEngine {
             !!this.canvas,
             isCrossHairVisible,
             !isImageInDragMode,
-            projectType !== ProjectType.IMAGE_RECOGNITION,
+            true,
             !activePopupType,
             isMouseOverCanvas,
             !isCustomCursorBlocked

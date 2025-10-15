@@ -18,14 +18,5 @@ export const ImportFormatData: ImportFormatDataMap = {
             type: AnnotationFormatType.VOC,
             label: 'Multiple files in VOC XML format.'
         }
-    ],
-    [LabelType.POINT]: [],
-    [LabelType.LINE]: [],
-    [LabelType.POLYGON]: [
-        {
-            type: AnnotationFormatType.COCO,
-            label: 'Single file in COCO JSON format.'
-        }
-    ],
-    [LabelType.IMAGE_RECOGNITION]: []
+    ]
 }

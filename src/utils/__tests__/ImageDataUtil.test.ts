@@ -10,15 +10,7 @@ const getDummyImageData = (id: string): ImageData => {
         id,
         fileData: new File([''], 'filename.txt', { type: AcceptedFileType.TEXT }),
         loadStatus: true,
-        labelRects: [],
-        labelPoints: [],
-        labelLines: [],
-        labelPolygons: [],
-        labelNameIds: [],
-        isVisitedByYOLOObjectDetector: false,
-        isVisitedBySSDObjectDetector: false,
-        isVisitedByPoseDetector: false,
-        isVisitedByRoboflowAPI: false
+        labelRects: []
     };
 };
 

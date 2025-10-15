@@ -5,7 +5,7 @@ import {AppState} from "../../../store";
 import {connect} from "react-redux";
 import {IPoint} from "../../../interfaces/IPoint";
 import classNames from "classnames";
-import {LabelName, LabelPoint, LabelRect} from "../../../store/labels/types";
+import {LabelName, LabelRect} from "../../../store/labels/types";
 import {ImageButton} from "../../Common/ImageButton/ImageButton";
 import {LabelActions} from "../../../logic/actions/LabelActions";
 import {ImageData} from "../../../store/labels/types";
@@ -19,7 +19,7 @@ interface IProps {
     updatePreventCustomCursorStatus: (preventCustomCursor: boolean) => any;
     activeLabelId: string;
     highlightedLabelId: string;
-    labelData: LabelRect | LabelPoint;
+    labelData: LabelRect;
     imageData: ImageData;
     updateImageDataById: (id: string, newImageData: ImageData) => any;
 }
@@ -50,18 +50,6 @@ const LabelControlPanel: React.FC<IProps> = ({position, updatePreventCustomCurso
                     }
                 } else {
                     return labelRect
-                }
-            }),
-            labelPoints: imageData.labelPoints.map((labelPoint: LabelPoint) => {
-                if (labelPoint.id === labelData.id) {
-                    const labelName: LabelName = findLast(LabelsSelector.getLabelNames(), {name: labelPoint.suggestedLabel});
-                    return {
-                        ...labelPoint,
-                        status: LabelStatus.ACCEPTED,
-                        labelId: !!labelName ? labelName.id : labelPoint.labelId
-                    }
-                } else {
-                    return labelPoint
                 }
             })
         };

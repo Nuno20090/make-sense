@@ -1,35 +1,35 @@
 import classNames from 'classnames';
 import React from 'react';
 import { connect } from 'react-redux';
-import './App.scss';
 import { ProjectType } from './data/enums/ProjectType';
 import { ISize } from './interfaces/ISize';
 import { Settings } from './settings/Settings';
 import { AppState } from './store';
-import { RoboflowAPIDetails } from './store/ai/types';
 import EditorView from './views/EditorView/EditorView';
 import MainView from './views/MainView/MainView';
 import NotificationsView from './views/NotificationsView/NotificationsView';
 import PopupView from './views/PopupView/PopupView';
 import { SizeItUpView } from './views/SizeItUpView/SizeItUpView';
 
+import './App.scss';
+
 interface IProps {
     projectType: ProjectType;
     windowSize: ISize;
-    isObjectDetectorLoaded: boolean;
-    isPoseDetectionLoaded: boolean;
-    isYOLOV5ObjectDetectorLoaded: boolean;
-    roboflowAPIDetails: RoboflowAPIDetails;
+    //isObjectDetectorLoaded: boolean;
+    //isPoseDetectionLoaded: boolean;
+    //isYOLOV5ObjectDetectorLoaded: boolean;
+    //roboflowAPIDetails: RoboflowAPIDetails;
 }
 
 const App: React.FC<IProps> = (
     {
         projectType,
         windowSize,
-        isObjectDetectorLoaded,
-        isPoseDetectionLoaded,
-        isYOLOV5ObjectDetectorLoaded,
-        roboflowAPIDetails
+        //isObjectDetectorLoaded,
+        //isPoseDetectionLoaded,
+        //isYOLOV5ObjectDetectorLoaded,
+        //roboflowAPIDetails
     }
 ) => {
     const selectRoute = () => {
@@ -43,13 +43,13 @@ const App: React.FC<IProps> = (
             }
         }
     };
-    const isAILoaded = isObjectDetectorLoaded
-        || isPoseDetectionLoaded
-        || isYOLOV5ObjectDetectorLoaded
-        || (roboflowAPIDetails.model !== '' && roboflowAPIDetails.key !== '' && roboflowAPIDetails.status)
+    //const isAILoaded = isObjectDetectorLoaded
+    //    || isPoseDetectionLoaded
+    //    || isYOLOV5ObjectDetectorLoaded
+    //    || (roboflowAPIDetails.model !== '' && roboflowAPIDetails.key !== '' && roboflowAPIDetails.status)
 
     return (
-        <div className={classNames('App', {'AI': isAILoaded})} draggable={false}
+        <div className={classNames('App')} draggable={false}
         >
             {selectRoute()}
             <PopupView/>
@@ -62,10 +62,10 @@ const App: React.FC<IProps> = (
 const mapStateToProps = (state: AppState) => ({
     projectType: state.general.projectData.type,
     windowSize: state.general.windowSize,
-    isSSDObjectDetectorLoaded: state.ai.isSSDObjectDetectorLoaded,
-    isPoseDetectorLoaded: state.ai.isPoseDetectorLoaded,
-    isYOLOV5ObjectDetectorLoaded: state.ai.isYOLOV5ObjectDetectorLoaded,
-    roboflowAPIDetails: state.ai.roboflowAPIDetails
+    //isSSDObjectDetectorLoaded: state.ai.isSSDObjectDetectorLoaded,
+    //isPoseDetectorLoaded: state.ai.isPoseDetectorLoaded,
+    //isYOLOV5ObjectDetectorLoaded: state.ai.isYOLOV5ObjectDetectorLoaded,
+    //roboflowAPIDetails: state.ai.roboflowAPIDetails
 });
 
 export default connect(

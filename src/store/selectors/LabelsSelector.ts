@@ -1,5 +1,5 @@
 import {store} from '../..';
-import {ImageData, LabelLine, LabelName, LabelPoint, LabelPolygon, LabelRect} from '../labels/types';
+import {ImageData, LabelName, LabelRect} from '../labels/types';
 import {find} from 'lodash';
 import {LabelType} from '../../data/enums/LabelType';
 
@@ -65,35 +65,5 @@ export class LabelsSelector {
         const activeImage = LabelsSelector.getActiveImageData();
         if (!activeImage) return null;
         return find(activeImage.labelRects, {id: activeLabelId});
-    }
-
-    public static getActivePointLabel(): LabelPoint | null {
-        const activeLabelId: string | null = LabelsSelector.getActiveLabelId();
-
-        if (activeLabelId === null)
-            return null;
-        const activeImage = LabelsSelector.getActiveImageData();
-        if (!activeImage) return null;
-        return find(activeImage.labelPoints, {id: activeLabelId});
-    }
-
-    public static getActivePolygonLabel(): LabelPolygon | null {
-        const activeLabelId: string | null = LabelsSelector.getActiveLabelId();
-
-        if (activeLabelId === null)
-            return null;
-        const activeImage = LabelsSelector.getActiveImageData();
-        if (!activeImage) return null;
-        return find(activeImage.labelPolygons, {id: activeLabelId});
-    }
-
-    public static getActiveLineLabel(): LabelLine | null {
-        const activeLabelId: string | null = LabelsSelector.getActiveLabelId();
-
-        if (activeLabelId === null)
-            return null;
-        const activeImage = LabelsSelector.getActiveImageData();
-        if (!activeImage) return null;
-        return find(activeImage.labelLines, {id: activeLabelId});
     }
 }

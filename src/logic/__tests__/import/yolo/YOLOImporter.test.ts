@@ -10,15 +10,7 @@ const getDummyImageData = (fileName: string): ImageData => {
         id: uuidv4(),
         fileData: new File([''], fileName, { type: AcceptedFileType.IMAGE }),
         loadStatus: true,
-        labelRects: [],
-        labelPoints: [],
-        labelLines: [],
-        labelPolygons: [],
-        labelNameIds: [],
-        isVisitedByYOLOObjectDetector: false,
-        isVisitedBySSDObjectDetector: false,
-        isVisitedByPoseDetector: false,
-        isVisitedByRoboflowAPI: false
+        labelRects: []
     };
 };
 

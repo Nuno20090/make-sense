@@ -1,11 +1,9 @@
-import {Annotation, LabelName, LabelPoint, LabelPolygon, LabelRect} from '../store/labels/types';
+import { find, sample } from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
-import {find} from 'lodash';
-import {IRect} from '../interfaces/IRect';
-import {LabelStatus} from '../data/enums/LabelStatus';
-import {IPoint} from '../interfaces/IPoint';
-import { sample } from 'lodash';
-import {Settings} from '../settings/Settings';
+import { LabelStatus } from '../data/enums/LabelStatus';
+import { IRect } from '../interfaces/IRect';
+import { Settings } from '../settings/Settings';
+import { Annotation, LabelName, LabelRect } from '../store/labels/types';
 
 export class LabelUtil {
     public static createLabelName(name: string): LabelName {
@@ -36,26 +34,26 @@ export class LabelUtil {
         }
     }
 
-    public static createLabelPolygon(labelId: string, vertices: IPoint[]): LabelPolygon {
-        return {
-            id: uuidv4(),
-            labelId,
-            vertices,
-            isVisible: true
-        }
-    }
+    //public static createLabelPolygon(labelId: string, vertices: IPoint[]): LabelPolygon {
+    //    return {
+    //        id: uuidv4(),
+    //        labelId,
+    //        vertices,
+    //        isVisible: true
+    //    }
+    //}
 
-    public static createLabelPoint(labelId: string, point: IPoint): LabelPoint {
-        return {
-            id: uuidv4(),
-            labelId,
-            point,
-            isVisible: true,
-            isCreatedByAI: false,
-            status: LabelStatus.ACCEPTED,
-            suggestedLabel: null
-        }
-    }
+    //public static createLabelPoint(labelId: string, point: IPoint): LabelPoint {
+    //    return {
+    //        id: uuidv4(),
+    //        labelId,
+    //        point,
+    //        isVisible: true,
+    //        isCreatedByAI: false,
+    //        status: LabelStatus.ACCEPTED,
+    //        suggestedLabel: null
+    //    }
+    //}
 
     public static toggleAnnotationVisibility<AnnotationType extends Annotation>(annotation: AnnotationType): AnnotationType {
         return {

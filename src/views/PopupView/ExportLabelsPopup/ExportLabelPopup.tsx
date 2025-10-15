@@ -4,11 +4,11 @@ import { AnnotationFormatType } from '../../../data/enums/AnnotationFormatType';
 import { RectLabelsExporter } from '../../../logic/export/RectLabelsExporter';
 import { LabelType } from '../../../data/enums/LabelType';
 import { ILabelFormatData } from '../../../interfaces/ILabelFormatData';
-import { PointLabelsExporter } from '../../../logic/export/PointLabelsExport';
-import { PolygonLabelsExporter } from '../../../logic/export/polygon/PolygonLabelsExporter';
+//import { PointLabelsExporter } from '../../../logic/export/PointLabelsExport';
+//import { PolygonLabelsExporter } from '../../../logic/export/polygon/PolygonLabelsExporter';
 import { PopupActions } from '../../../logic/actions/PopupActions';
-import { LineLabelsExporter } from '../../../logic/export/LineLabelExport';
-import { TagLabelsExporter } from '../../../logic/export/TagLabelsExport';
+//import { LineLabelsExporter } from '../../../logic/export/LineLabelExport';
+//import { TagLabelsExporter } from '../../../logic/export/TagLabelsExport';
 import GenericLabelTypePopup from '../GenericLabelTypePopup/GenericLabelTypePopup';
 import { ExportFormatData } from '../../../data/ExportFormatData';
 import { AppState } from '../../../store';
@@ -26,18 +26,6 @@ const ExportLabelPopup: React.FC<IProps> = ({ activeLabelType }) => {
         switch (type) {
             case LabelType.RECT:
                 RectLabelsExporter.export(exportFormatType);
-                break;
-            case LabelType.POINT:
-                PointLabelsExporter.export(exportFormatType);
-                break;
-            case LabelType.LINE:
-                LineLabelsExporter.export(exportFormatType);
-                break;
-            case LabelType.POLYGON:
-                PolygonLabelsExporter.export(exportFormatType);
-                break;
-            case LabelType.IMAGE_RECOGNITION:
-                TagLabelsExporter.export(exportFormatType);
                 break;
         }
         PopupActions.close();

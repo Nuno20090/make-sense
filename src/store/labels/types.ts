@@ -45,7 +45,7 @@ export type ImageData = {
     //labelPoints: LabelPoint[];
     //labelLines: LabelLine[];
     //labelPolygons: LabelPolygon[];
-    labelNameIds: string[];
+    //labelNameIds: string[];
 
     // YOLO
     //isVisitedByYOLOObjectDetector: boolean;
