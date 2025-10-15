@@ -95,7 +95,7 @@ class LabelsToolkit extends React.Component<IProps, IState> {
                     className={getClassName("Content")}
                     style={{ height: isActive ? activeTabContentHeight : 0 }}
                 >
-                    {labelType === LabelType.RECT && <RectLabelsList
+                    {labelType === LabelType.RECT && imagesData && imagesData.length > 0 && imagesData[activeImageIndex] && <RectLabelsList
                         size={{
                             width: size.width - 20,
                             height: activeTabContentHeight - 20

@@ -63,7 +63,7 @@ export type ImageData = {
 }
 
 export type LabelsState = {
-    activeImageIndex: number;
+    activeImageIndex: number | null;
     activeLabelNameId: string;
     activeLabelType: LabelType;
     activeLabelId: string | null;
@@ -76,7 +76,7 @@ export type LabelsState = {
 interface UpdateActiveImageIndex {
     type: typeof Action.UPDATE_ACTIVE_IMAGE_INDEX;
     payload: {
-        activeImageIndex: number;
+        activeImageIndex: number | null;
     }
 }
 

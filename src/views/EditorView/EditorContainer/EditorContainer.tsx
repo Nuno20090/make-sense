@@ -117,17 +117,26 @@ const EditorContainer: React.FC<IProps> = (
                 {/* {projectType === ProjectType.OBJECT_DETECTION && <EditorTopNavigationBar
                     key='editor-top-navigation-bar'
                 />} */}
-                <Editor
-                    size={calculateEditorSize()}
-                    imageData={imagesData[activeImageIndex]}
-                    key='editor'
-                />
-                <EditorBottomNavigationBar
-                    imageData={imagesData[activeImageIndex]}
-                    size={calculateEditorSize()}
-                    totalImageCount={imagesData.length}
-                    key='editor-bottom-navigation-bar'
-                />
+                {
+                    (() => {
+                        const currentImageData = (imagesData && activeImageIndex !== null && imagesData.length > 0) ? imagesData[activeImageIndex] : null;
+                        return (
+                            <>
+                                <Editor
+                                    size={calculateEditorSize()}
+                                    imageData={currentImageData}
+                                    key='editor'
+                                />
+                                <EditorBottomNavigationBar
+                                    imageData={currentImageData}
+                                    size={calculateEditorSize()}
+                                    totalImageCount={imagesData.length}
+                                    key='editor-bottom-navigation-bar'
+                                />
+                            </>
+                        )
+                    })()
+                }
             </div>
             <SideNavigationBar
                 direction={Direction.RIGHT}

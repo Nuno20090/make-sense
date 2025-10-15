@@ -25,7 +25,7 @@ export class LabelsSelector {
         return store.getState().labels.imagesData;
     }
 
-    public static getActiveImageIndex(): number {
+    public static getActiveImageIndex(): number | null {
         return store.getState().labels.activeImageIndex;
     }
 
@@ -40,12 +40,13 @@ export class LabelsSelector {
 
     public static getImageDataByIndex(index: number): ImageData {
         const imagesData: ImageData[] = LabelsSelector.getImagesData();
+        if (!imagesData || index < 0 || index > imagesData.length - 1) return null;
         return imagesData[index];
     }
 
     public static getImageDataById(id: string): ImageData {
         const imagesData: ImageData[] = LabelsSelector.getImagesData();
-        return find(imagesData, {id});
+        return find(imagesData, {id}) || null;
     }
 
     public static getActiveLabelId(): string | null {
@@ -61,8 +62,9 @@ export class LabelsSelector {
 
         if (activeLabelId === null)
             return null;
-
-        return find(LabelsSelector.getActiveImageData().labelRects, {id: activeLabelId});
+        const activeImage = LabelsSelector.getActiveImageData();
+        if (!activeImage) return null;
+        return find(activeImage.labelRects, {id: activeLabelId});
     }
 
     public static getActivePointLabel(): LabelPoint | null {
@@ -70,8 +72,9 @@ export class LabelsSelector {
 
         if (activeLabelId === null)
             return null;
-
-        return find(LabelsSelector.getActiveImageData().labelPoints, {id: activeLabelId});
+        const activeImage = LabelsSelector.getActiveImageData();
+        if (!activeImage) return null;
+        return find(activeImage.labelPoints, {id: activeLabelId});
     }
 
     public static getActivePolygonLabel(): LabelPolygon | null {
@@ -79,8 +82,9 @@ export class LabelsSelector {
 
         if (activeLabelId === null)
             return null;
-
-        return find(LabelsSelector.getActiveImageData().labelPolygons, {id: activeLabelId});
+        const activeImage = LabelsSelector.getActiveImageData();
+        if (!activeImage) return null;
+        return find(activeImage.labelPolygons, {id: activeLabelId});
     }
 
     public static getActiveLineLabel(): LabelLine | null {
@@ -88,7 +92,8 @@ export class LabelsSelector {
 
         if (activeLabelId === null)
             return null;
-
-        return find(LabelsSelector.getActiveImageData().labelLines, {id: activeLabelId});
+        const activeImage = LabelsSelector.getActiveImageData();
+        if (!activeImage) return null;
+        return find(activeImage.labelLines, {id: activeLabelId});
     }
 }

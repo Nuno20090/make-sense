@@ -11,7 +11,7 @@ import {ImageActions} from "../../../logic/actions/ImageActions";
 
 interface IProps {
     size: ISize;
-    imageData: ImageData;
+    imageData: ImageData | null;
     totalImageCount: number;
     activeImageIndex: number;
     activeContext: ContextType;
@@ -21,6 +21,7 @@ const EditorBottomNavigationBar: React.FC<IProps> = ({size, imageData, totalImag
     const minWidth:number = 400;
 
     const getImageCounter = () => {
+        if (totalImageCount === 0) return '0 / 0';
         return (activeImageIndex + 1) + " / " + totalImageCount;
     };
 
@@ -44,7 +45,7 @@ const EditorBottomNavigationBar: React.FC<IProps> = ({size, imageData, totalImag
                 externalClassName={"left"}
             />
             {size.width > minWidth ?
-                <div className="CurrentImageName"> {imageData.fileData.name} </div> :
+                <div className="CurrentImageName"> {imageData ? imageData.fileData.name : 'No image'} </div> :
                 <div className="CurrentImageCount"> {getImageCounter()} </div>
             }
             <ImageButton

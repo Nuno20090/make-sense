@@ -49,8 +49,8 @@ export class ImageActions {
     if (labelNames.length < labelIndex + 1) {
       return;
     }
-
     const imageData: ImageData = LabelsSelector.getActiveImageData();
+    if (!imageData) return;
     store.dispatch(
       updateImageDataById(
         imageData.id,

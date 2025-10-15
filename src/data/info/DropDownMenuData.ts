@@ -1,6 +1,8 @@
 import {updateActivePopupType} from '../../store/general/actionCreators';
 import {PopupWindowType} from '../enums/PopupWindowType';
 import {store} from '../../index';
+import { updateImageData, updateActiveImageIndex } from '../../store/labels/actionCreators';
+import { ImageRepository } from '../../logic/imageRepository/ImageRepository';
 
 export type DropDownMenuNode = {
     name: string
@@ -34,6 +36,19 @@ export const DropDownMenuData: DropDownMenuNode[] = [
                 imageAlt: 'images',
                 disabled: false,
                 onClick: () => store.dispatch(updateActivePopupType(PopupWindowType.IMPORT_IMAGES))
+            },
+            {
+                name: 'DEBUG: Delete all images',
+                description: 'DEBUG: Delete all images',
+                imageSrc: 'ico/camera.png',
+                imageAlt: 'images',
+                disabled: false,
+                onClick: () => {
+                    // Clear images from store and repository
+                    store.dispatch(updateImageData([]));
+                    store.dispatch(updateActiveImageIndex(null));
+                    ImageRepository.clear();
+                }
             }
         ]
     }

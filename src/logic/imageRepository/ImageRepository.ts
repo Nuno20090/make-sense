@@ -18,4 +18,8 @@ export class ImageRepository {
     public static getById(uuid: string): HTMLImageElement {
         return ImageRepository.repository[uuid];
     }
+
+    public static clear(): void {
+        ImageRepository.repository = {};
+    }
 }
