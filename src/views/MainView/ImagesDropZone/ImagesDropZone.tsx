@@ -78,7 +78,6 @@ const ImagesDropZone: React.FC<IProps> = (props: PropsWithChildren<IProps>) => {
     };
 
     const startEditorWithObjectDetection = () => startEditor(ProjectType.OBJECT_DETECTION)
-    const startEditorWithImageRecognition = () => startEditor(ProjectType.IMAGE_RECOGNITION)
 
     return(
         <div className='ImagesDropZone'>
@@ -87,14 +86,9 @@ const ImagesDropZone: React.FC<IProps> = (props: PropsWithChildren<IProps>) => {
             </div>
             <div className='DropZoneButtons'>
                 <TextButton
-                    label={'Object Detection'}
+                    label={'Start'}
                     isDisabled={!acceptedFiles.length}
                     onClick={startEditorWithObjectDetection}
-                />
-                <TextButton
-                    label={'Image recognition'}
-                    isDisabled={!acceptedFiles.length}
-                    onClick={startEditorWithImageRecognition}
                 />
             </div>
         </div>
