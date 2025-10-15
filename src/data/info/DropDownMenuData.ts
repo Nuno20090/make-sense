@@ -20,16 +20,16 @@ export const DropDownMenuData: DropDownMenuNode[] = [
         disabled: false,
         children: [
             {
-                name: 'Edit Labels',
-                description: 'Modify labels list',
+                name: 'Editar Lista de Defeitos',
+                description: 'Modificar lista de defeitos',
                 imageSrc: 'ico/tags.png',
                 imageAlt: 'labels',
                 disabled: false,
                 onClick: () => store.dispatch(updateActivePopupType(PopupWindowType.UPDATE_LABEL))
             },
             {
-                name: 'Import Images',
-                description: 'Load more images',
+                name: 'Importar Imagens',
+                description: 'Importar mais imagens',
                 imageSrc: 'ico/camera.png',
                 imageAlt: 'images',
                 disabled: false,

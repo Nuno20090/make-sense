@@ -71,7 +71,6 @@
   .DropDownInlineActions {
     display: flex;
     gap: 6px;
-    margin-left: 12px;
 
     button.DropDownMenuContentOption {
       display: inline-flex;
@@ -95,7 +94,7 @@
 
     .InlineActionLabel {
       display: inline-block;
-      font-size: 12px;
+      font-size: 16px;
       color: rgba(255,255,255,0.9);
       font-weight: 600;
     }

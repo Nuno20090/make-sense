@@ -51,9 +51,9 @@ const ImagesDropZone: React.FC<IProps> = (props: PropsWithChildren<IProps>) => {
                     alt={'upload'}
                     src={'ico/box-opened.png'}
                 />
-                <p className='extraBold'>Drop images</p>
-                <p>or</p>
-                <p className='extraBold'>Click here to select them</p>
+                <p className='extraBold'>Arraste as imagens para aqui</p>
+                <p>ou</p>
+                <p className='extraBold'>Clique aqui para selecionar do disco</p>
             </>;
         else if (acceptedFiles.length === 1)
             return <>
@@ -62,7 +62,7 @@ const ImagesDropZone: React.FC<IProps> = (props: PropsWithChildren<IProps>) => {
                     alt={'uploaded'}
                     src={'ico/box-closed.png'}
                 />
-                <p className='extraBold'>1 image loaded</p>
+                <p className='extraBold'>1 imagem selecionada</p>
             </>;
         else
             return <>
@@ -73,7 +73,7 @@ const ImagesDropZone: React.FC<IProps> = (props: PropsWithChildren<IProps>) => {
                     alt={'uploaded'}
                     src={'ico/box-closed.png'}
                 />
-                <p key={2} className='extraBold'>{acceptedFiles.length} images loaded</p>
+                <p key={2} className='extraBold'>{acceptedFiles.length} imagens selecionadas</p>
             </>;
     };
 
@@ -96,7 +96,7 @@ const ImagesDropZone: React.FC<IProps> = (props: PropsWithChildren<IProps>) => {
         if (!blob) return;
 
         // create a File with a filename so downstream code can treat it like a real File
-        const file = new File([blob], 'sample-white-rect.png', { type: 'image/png' });
+        const file = new File([blob], 'sample-image', { type: 'image/png' });
 
         // mimic acceptedFiles flow: add image data and start the editor
         props.updateProjectDataAction({
@@ -115,12 +115,12 @@ const ImagesDropZone: React.FC<IProps> = (props: PropsWithChildren<IProps>) => {
             </div>
             <div className='DropZoneButtons'>
                 <TextButton
-                    label={'Start'}
+                    label={'Iniciar'}
                     isDisabled={!acceptedFiles.length}
                     onClick={startEditorWithObjectDetection}
                 />
                 <TextButton
-                    label={'Use sample image'}
+                    label={'Img de exemplo'}
                     isDisabled={false}
                     onClick={useSampleImage}
                 />

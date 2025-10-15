@@ -115,7 +115,7 @@ const EditorTopNavigationBar: React.FC<IProps> = (
                 {
                     getButtonWithTooltip(
                         'zoom-in',
-                        'zoom in',
+                        'ampliar',
                         'ico/zoom-in.png',
                         'zoom-in',
                         false,
@@ -126,7 +126,7 @@ const EditorTopNavigationBar: React.FC<IProps> = (
                 {
                     getButtonWithTooltip(
                         'zoom-out',
-                        'zoom out',
+                        'reduzir',
                         'ico/zoom-out.png',
                         'zoom-out',
                         false,
@@ -137,7 +137,7 @@ const EditorTopNavigationBar: React.FC<IProps> = (
                 {
                     getButtonWithTooltip(
                         'zoom-fit',
-                        'fit image to available space',
+                        'ajustar imagem ao espaço disponível',
                         'ico/zoom-fit.png',
                         'zoom-fit',
                         false,

@@ -62,9 +62,9 @@ const EditorContainer: React.FC<IProps> = (
     const leftSideBarCompanionRender = () => {
         return <>
             <VerticalEditorButton
-                label='Images'
+                label='Imagens'
                 image={'/ico/camera.png'}
-                imageAlt={'images'}
+                imageAlt={'imagens'}
                 onClick={leftSideBarButtonOnClick}
                 isActive={leftTabStatus}
             />
@@ -87,9 +87,9 @@ const EditorContainer: React.FC<IProps> = (
     const rightSideBarCompanionRender = () => {
         return <>
             <VerticalEditorButton
-                label='Labels'
+                label='Defeitos'
                 image={'/ico/tags.png'}
-                imageAlt={'labels'}
+                imageAlt={'defeitos'}
                 onClick={rightSideBarButtonOnClick}
                 isActive={rightTabStatus}
             />
