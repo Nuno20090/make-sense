@@ -41,7 +41,7 @@ interface IState {
 
 class LabelInputField extends React.Component<IProps, IState> {
     private dropdownOptionHeight: number = 30;
-    private dropdownOptionCount: number = 6;
+    private dropdownOptionCount: number = 20;
     private dropdownMargin: number = 4;
     private dropdownLabel: HTMLDivElement;
     private dropdown: HTMLDivElement;
