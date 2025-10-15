@@ -142,5 +142,5 @@ export class EditorActions {
             EditorModel.cursor.style.display = "none";
             EditorModel.mousePositionIndicator.style.display = "none";
         }
-    };
+    }
 }

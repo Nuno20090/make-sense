@@ -114,9 +114,9 @@ const EditorContainer: React.FC<IProps> = (
                 onMouseDown={() => ContextManager.switchCtx(ContextType.EDITOR)}
                  key='editor-wrapper'
             >
-                {projectType === ProjectType.OBJECT_DETECTION && <EditorTopNavigationBar
+                {/* {projectType === ProjectType.OBJECT_DETECTION && <EditorTopNavigationBar
                     key='editor-top-navigation-bar'
-                />}
+                />} */}
                 <Editor
                     size={calculateEditorSize()}
                     imageData={imagesData[activeImageIndex]}
