@@ -1,9 +1,7 @@
-import {IRect} from '../../interfaces/IRect';
-import {Action} from '../Actions';
-import {LabelType} from '../../data/enums/LabelType';
-import {IPoint} from '../../interfaces/IPoint';
-import {LabelStatus} from '../../data/enums/LabelStatus';
-import {ILine} from '../../interfaces/ILine';
+import { LabelStatus } from '../../data/enums/LabelStatus';
+import { LabelType } from '../../data/enums/LabelType';
+import { IRect } from '../../interfaces/IRect';
+import { Action } from '../Actions';
 
 export type Annotation = {
     id: string;
@@ -17,7 +15,7 @@ export type LabelRect = Annotation & {
     status: LabelStatus;
     suggestedLabel: string;
 }
-
+/*
 export type LabelPoint = Annotation & {
     point: IPoint;
     isCreatedByAI: boolean;
@@ -32,7 +30,7 @@ export type LabelPolygon = Annotation & {
 export type LabelLine = Annotation & {
     line: ILine;
 }
-
+*/
 export type LabelName = {
     name: string;
     id: string;
@@ -44,22 +42,22 @@ export type ImageData = {
     fileData: File;
     loadStatus: boolean;
     labelRects: LabelRect[];
-    labelPoints: LabelPoint[];
-    labelLines: LabelLine[];
-    labelPolygons: LabelPolygon[];
+    //labelPoints: LabelPoint[];
+    //labelLines: LabelLine[];
+    //labelPolygons: LabelPolygon[];
     labelNameIds: string[];
 
     // YOLO
-    isVisitedByYOLOObjectDetector: boolean;
+    //isVisitedByYOLOObjectDetector: boolean;
 
     // SSD
-    isVisitedBySSDObjectDetector: boolean;
+    //isVisitedBySSDObjectDetector: boolean;
 
     // POSE NET
-    isVisitedByPoseDetector: boolean;
+    //isVisitedByPoseDetector: boolean;
 
     // ROBOFLOW API
-    isVisitedByRoboflowAPI: boolean;
+    //isVisitedByRoboflowAPI: boolean;
 }
 
 export type LabelsState = {

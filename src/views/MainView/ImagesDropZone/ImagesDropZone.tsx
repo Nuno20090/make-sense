@@ -116,7 +116,8 @@ const ImagesDropZone: React.FC<IProps> = (props: PropsWithChildren<IProps>) => {
             <div className='DropZoneButtons'>
                 <TextButton
                     label={'Iniciar'}
-                    isDisabled={!acceptedFiles.length}
+                    //isDisabled={!acceptedFiles.length}
+                    isDisabled={false}
                     onClick={startEditorWithObjectDetection}
                 />
                 <TextButton

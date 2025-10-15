@@ -2,6 +2,7 @@ import {GeneralActionTypes, GeneralState} from './types';
 import {Action} from '../Actions';
 import {CustomCursorStyle} from '../../data/enums/CustomCursorStyle';
 import {ViewPointSettings} from '../../settings/ViewPointSettings';
+import {ProjectType} from '../../data/enums/ProjectType';
 
 const initialState: GeneralState = {
     windowSize: null,
@@ -13,7 +14,7 @@ const initialState: GeneralState = {
     crossHairVisible: false,
     enablePerClassColoration: true,
     projectData: {
-        type: null,
+        type: ProjectType.OBJECT_DETECTION,
         name: 'my-project-name',
     },
     zoom: ViewPointSettings.MIN_ZOOM
