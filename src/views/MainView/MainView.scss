@@ -7,10 +7,8 @@
   margin: 0;
   padding: 0;
 
-  background-image: linear-gradient(to top right, $primaryColor, $secondaryColor);
-  background-size: 400% 400%;
-  animation: backgroundAnimation 10s ease-in-out infinite;
-
+  background-color: beige;
+  
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -91,10 +89,6 @@
   z-index: 0;
   width: 75%;
   height: 100%;
-
-  .TriangleVerticalContent{
-    background-color: rgba(0, 0, 0, 0.3);
-  }
 }
 
 #lower {
@@ -177,25 +171,6 @@
     right: 20px;
     bottom: 20px;
   }
-}
-
-.TriangleVertical {
-  width: 200px;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  right: -200px;
-  background-color: transparent;
-  overflow: hidden;
-}
-.TriangleVerticalContent{
-  width: 200px;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  transform: skew(-6deg) translateX(-50%);
-  background-color: $darkThemeFirstColor;
 }
 
 .EditorFeaturesTiles {
