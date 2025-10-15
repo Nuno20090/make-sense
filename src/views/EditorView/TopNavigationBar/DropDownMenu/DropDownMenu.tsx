@@ -4,11 +4,10 @@ import './DropDownMenu.scss';
 import {DropDownMenuData, DropDownMenuNode} from '../../../../data/info/DropDownMenuData';
 import {EventType} from '../../../../data/enums/EventType';
 import {updatePreventCustomCursorStatus} from '../../../../store/general/actionCreators';
-import {AppState} from '../../../../store';
 import {connect} from 'react-redux';
 
 interface IProps {
-    updatePreventCustomCursorStatusAction: (preventCustomCursor: boolean) => any;
+    updatePreventCustomCursorStatusAction: (preventCustomCursor: boolean) => void;
 }
 
 const DropDownMenu: React.FC<IProps> = ({updatePreventCustomCursorStatusAction}) => {
@@ -17,7 +16,16 @@ const DropDownMenu: React.FC<IProps> = ({updatePreventCustomCursorStatusAction})
     const [activeTabIdx, setActiveTabIdx] = useState(null);
     const [activeDropDownAnchor, setDropDownAnchor] = useState(null);
 
-    const onTabClick = (tabIdx: number, event) => {
+    const onMouseDownBeyondDropDown = (event: MouseEvent) => {
+        const target = event.target as HTMLElement | null;
+        if (target && (target.classList.contains('DropDownMenuTab') || target.classList.contains('DropDownMenuContentOption'))) {
+            return;
+        }
+        setActiveTabIdx(null);
+        document.removeEventListener(EventType.MOUSE_DOWN, onMouseDownBeyondDropDown);
+    }
+
+    const onTabClick = (tabIdx: number, event: React.MouseEvent<HTMLDivElement>) => {
         if (activeTabIdx === null) {
             document.addEventListener(EventType.MOUSE_DOWN, onMouseDownBeyondDropDown);
         }
@@ -27,30 +35,24 @@ const DropDownMenu: React.FC<IProps> = ({updatePreventCustomCursorStatusAction})
             setDropDownAnchor(null);
         } else {
             setActiveTabIdx(tabIdx);
-            setDropDownAnchor({x: event.target.offsetLeft, y: topAnchor});
+            const target = event.currentTarget as HTMLElement;
+            setDropDownAnchor({x: target.offsetLeft, y: topAnchor});
         }
     }
 
-    const onMouseEnterWindow = (event) => {
+    const onMouseEnterWindow = () => {
         updatePreventCustomCursorStatusAction(true);
     }
 
-    const onMouseLeaveWindow = (event) => {
+    const onMouseLeaveWindow = () => {
         updatePreventCustomCursorStatusAction(false);
     }
 
-    const onMouseDownBeyondDropDown = (event) => {
-        if (event.target.classList.contains('DropDownMenuTab') || event.target.classList.contains('DropDownMenuContentOption')) {
-            return;
-        }
-        setActiveTabIdx(null);
-        document.removeEventListener(EventType.MOUSE_DOWN, onMouseDownBeyondDropDown);
-    }
-
-    const onMouseEnterTab = (tabIdx: number, event) => {
+    const onMouseEnterTab = (tabIdx: number, event: React.MouseEvent<HTMLDivElement>) => {
         if (activeTabIdx !== null && activeTabIdx !== tabIdx) {
             setActiveTabIdx(tabIdx);
-            setDropDownAnchor({x: event.target.offsetLeft, y: topAnchor});
+            const target = event.currentTarget as HTMLElement;
+            setDropDownAnchor({x: target.offsetLeft, y: topAnchor});
         }
     }
 
@@ -68,20 +70,6 @@ const DropDownMenu: React.FC<IProps> = ({updatePreventCustomCursorStatusAction})
         );
     }
 
-    const getDropDownContent = () => {
-        return DropDownMenuData.map((data: DropDownMenuNode, index: number) => getDropDownTab(data, index))
-    }
-
-    const wrapOnClick = (onClick?: () => void, disabled?: boolean): () => void => {
-        return () => {
-            if (!!disabled) return;
-            if (!!onClick) onClick();
-            setActiveTabIdx(null);
-            updatePreventCustomCursorStatusAction(false);
-            document.removeEventListener(EventType.MOUSE_DOWN, onMouseDownBeyondDropDown);
-        }
-    }
-
     const getDropDownTab = (data: DropDownMenuNode, index: number) => {
         return <div
             className={getDropDownMenuTabClassName(index)}
@@ -95,8 +83,47 @@ const DropDownMenu: React.FC<IProps> = ({updatePreventCustomCursorStatusAction})
                 alt={data.imageAlt}
             />
             {data.name}
+            {/* Render inline action buttons for the Actions tab (keep dropdown intact) */}
+            {data.children && data.children.length > 0 && index === 0 ? (
+                <div className='DropDownInlineActions'>
+                    {data.children.map((child, idx) => {
+                        const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+                            e.stopPropagation();
+                            if (!child.disabled && child.onClick) child.onClick();
+                        };
+
+                        return (
+                            <button
+                                key={idx}
+                                className={getDropDownMenuContentOption(child.disabled)}
+                                onClick={onClick}
+                                title={child.description || child.name}
+                            >
+                                <img src={child.imageSrc} alt={child.imageAlt} />
+                                <span className='InlineActionLabel'>{child.name}</span>
+                            </button>
+                        );
+                    })}
+                </div>
+            ) : null}
         </div>
     }
+
+    const getDropDownContent = () => {
+        return DropDownMenuData.map((data: DropDownMenuNode, index: number) => getDropDownTab(data, index))
+    }
+
+    const wrapOnClick = (onClick?: () => void, disabled?: boolean): () => void => {
+        return () => {
+            if (disabled) return;
+            if (onClick) onClick();
+            setActiveTabIdx(null);
+            updatePreventCustomCursorStatusAction(false);
+            document.removeEventListener(EventType.MOUSE_DOWN, onMouseDownBeyondDropDown);
+        }
+    }
+
+    
 
     const getDropDownWindow = (data: DropDownMenuNode) => {
         if (activeTabIdx !== null) {
@@ -138,7 +165,7 @@ const mapDispatchToProps = {
     updatePreventCustomCursorStatusAction: updatePreventCustomCursorStatus,
 };
 
-const mapStateToProps = (state: AppState) => ({});
+const mapStateToProps = () => ({});
 
 export default connect(
     mapStateToProps,
