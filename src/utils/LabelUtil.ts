@@ -16,6 +16,14 @@ export class LabelUtil {
         }
     }
 
+    public static createLabelNameDefault(index: number, id: string, name: string): LabelName {
+        return {
+            id,
+            name,
+            color: Settings.LABEL_COLORS_PALETTE[index % Settings.LABEL_COLORS_PALETTE.length]
+        }
+    }
+
     public static createLabelRect(labelId: string, rect: IRect): LabelRect {
         return {
             id: uuidv4(),
