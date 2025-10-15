@@ -79,6 +79,11 @@ export class RectRenderEngine extends BaseRenderEngine {
                 const maxX: number = Math.max(this.startCreateRectPoint.x, mousePositionSnapped.x);
                 const maxY: number = Math.max(this.startCreateRectPoint.y, mousePositionSnapped.y);
 
+                console.log("HEYYY!!!");
+                console.log(this.startCreateRectPoint);
+                console.log(mousePositionSnapped);
+                console.log(minX, minY, maxX, maxY);
+
                 const rect = {x: minX, y: minY, width: maxX - minX, height: maxY - minY};
                 this.addRectLabel(RenderEngineUtil.transferRectFromImageToViewPortContent(rect, data));
             }
@@ -237,7 +242,7 @@ export class RectRenderEngine extends BaseRenderEngine {
         const activeLabelId = LabelsSelector.getActiveLabelNameId();
         const imageData: ImageData = LabelsSelector.getActiveImageData();
         const labelRect: LabelRect = LabelUtil.createLabelRect(activeLabelId, rect);
-        imageData.labelRects.push(labelRect);
+        imageData.labelRects.unshift(labelRect);
         store.dispatch(updateImageDataById(imageData.id, imageData));
         store.dispatch(updateFirstLabelCreatedFlag(true));
         store.dispatch(updateActiveLabelId(labelRect.id));
