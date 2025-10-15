@@ -10,7 +10,7 @@ const initialState: GeneralState = {
     activeContext: null,
     preventCustomCursor: false,
     imageDragMode: false,
-    crossHairVisible: true,
+    crossHairVisible: false,
     enablePerClassColoration: true,
     projectData: {
         type: null,

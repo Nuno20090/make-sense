@@ -1,18 +1,17 @@
+import classNames from 'classnames';
 import React from 'react';
+import { connect } from 'react-redux';
 import './App.scss';
+import { ProjectType } from './data/enums/ProjectType';
+import { ISize } from './interfaces/ISize';
+import { Settings } from './settings/Settings';
+import { AppState } from './store';
+import { RoboflowAPIDetails } from './store/ai/types';
 import EditorView from './views/EditorView/EditorView';
 import MainView from './views/MainView/MainView';
-import {ProjectType} from './data/enums/ProjectType';
-import {AppState} from './store';
-import {connect} from 'react-redux';
-import PopupView from './views/PopupView/PopupView';
-import {ISize} from './interfaces/ISize';
-import {Settings} from './settings/Settings';
-import {SizeItUpView} from './views/SizeItUpView/SizeItUpView';
-import {PlatformModel} from './staticModels/PlatformModel';
-import classNames from 'classnames';
 import NotificationsView from './views/NotificationsView/NotificationsView';
-import { RoboflowAPIDetails } from './store/ai/types';
+import PopupView from './views/PopupView/PopupView';
+import { SizeItUpView } from './views/SizeItUpView/SizeItUpView';
 
 interface IProps {
     projectType: ProjectType;
@@ -34,12 +33,6 @@ const App: React.FC<IProps> = (
     }
 ) => {
     const selectRoute = () => {
-        //return <EditorView/>;
-
-
-
-
-
         if (!projectType)
             return <MainView/>;
         else {

@@ -155,9 +155,8 @@ class Editor extends React.Component<IProps, IState> {
         const editorData: EditorData = EditorActions.getEditorData(event);
         EditorModel.mousePositionOnViewPortContent = CanvasUtil.getMousePositionOnCanvasFromEvent(event, EditorModel.canvas);
         EditorModel.primaryRenderingEngine.update(editorData);
-
+        
         if (this.props.imageDragMode) {
-            console.log('update view port helper');
             EditorModel.viewPortHelper.update(editorData);
         } else {
             EditorModel.supportRenderingEngine && EditorModel.supportRenderingEngine.update(editorData);
