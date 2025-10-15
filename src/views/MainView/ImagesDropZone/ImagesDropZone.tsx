@@ -79,6 +79,35 @@ const ImagesDropZone: React.FC<IProps> = (props: PropsWithChildren<IProps>) => {
 
     const startEditorWithObjectDetection = () => startEditor(ProjectType.OBJECT_DETECTION)
 
+    // Create an in-memory image (white rectangle) and start the editor with it.
+    const useSampleImage = async () => {
+        // create a canvas and draw a white rectangle (500x300)
+        const canvas = document.createElement('canvas');
+        canvas.width = 500;
+        canvas.height = 300;
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+            ctx.fillStyle = '#4a5c69ff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+        // convert canvas to blob and create a File
+        const blob: Blob | null = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+        if (!blob) return;
+
+        // create a File with a filename so downstream code can treat it like a real File
+        const file = new File([blob], 'sample-white-rect.png', { type: 'image/png' });
+
+        // mimic acceptedFiles flow: add image data and start the editor
+        props.updateProjectDataAction({
+            ...props.projectData,
+            type: ProjectType.OBJECT_DETECTION
+        });
+        props.updateActiveImageIndexAction(0);
+        props.addImageDataAction([ImageDataUtil.createImageDataFromFileData(file)]);
+        props.updateActivePopupTypeAction(PopupWindowType.INSERT_LABEL_NAMES);
+    }
+
     return(
         <div className='ImagesDropZone'>
             <div {...getRootProps({className: 'DropZone'})}>
@@ -89,6 +118,11 @@ const ImagesDropZone: React.FC<IProps> = (props: PropsWithChildren<IProps>) => {
                     label={'Start'}
                     isDisabled={!acceptedFiles.length}
                     onClick={startEditorWithObjectDetection}
+                />
+                <TextButton
+                    label={'Use sample image'}
+                    isDisabled={false}
+                    onClick={useSampleImage}
                 />
             </div>
         </div>

@@ -1,12 +1,10 @@
 import classNames from "classnames";
-import { find } from "lodash";
 import React from "react";
 import { connect } from "react-redux";
 import { ContextType } from "../../../../data/enums/ContextType";
 import { EventType } from "../../../../data/enums/EventType";
 import { LabelType } from "../../../../data/enums/LabelType";
 import { ProjectType } from "../../../../data/enums/ProjectType";
-import { ILabelToolkit, LabelToolkitData } from "../../../../data/info/LabelToolkitData";
 import { ISize } from "../../../../interfaces/ISize";
 import { ContextManager } from "../../../../logic/context/ContextManager";
 import { Settings } from "../../../../settings/Settings";
@@ -17,7 +15,7 @@ import RectLabelsList from "../RectLabelsList/RectLabelsList";
 import './LabelsToolkit.scss';
 
 interface IProps {
-    activeImageIndex:number,
+    activeImageIndex: number,
     activeLabelType: LabelType;
     imagesData: ImageData[];
     projectType: ProjectType;
@@ -44,17 +42,6 @@ class LabelsToolkit extends React.Component<IProps, IState> {
         this.tabs = [
             LabelType.RECT,
         ];
-
-        //this.tabs = props.projectType === ProjectType.IMAGE_RECOGNITION ?
-        //    [
-        //        LabelType.IMAGE_RECOGNITION
-        //    ] :
-        //    [
-        //        LabelType.RECT,
-        //        LabelType.POINT,
-        //        LabelType.LINE,
-        //        LabelType.POLYGON
-        //    ];
 
         const activeTab: LabelType = props.activeLabelType ? props.activeLabelType : this.tabs[0];
         props.updateActiveLabelType(activeTab);
@@ -83,16 +70,17 @@ class LabelsToolkit extends React.Component<IProps, IState> {
     };
 
     private headerClickHandler = (activeTab: LabelType) => {
+        console.log("Header click", activeTab);
         this.props.updateActiveLabelType(activeTab);
         this.props.updateActiveLabelId(null);
     };
 
     private renderChildren = () => {
-        const {size} = this.state;
-        const {activeImageIndex, imagesData, activeLabelType} = this.props;
+
+        const { size } = this.state;
+        const { activeImageIndex, imagesData, activeLabelType } = this.props;
         return this.tabs.reduce((children, labelType: LabelType, index: number) => {
             const isActive: boolean = labelType === activeLabelType;
-            const tabData: ILabelToolkit = find(LabelToolkitData, {labelType});
             const activeTabContentHeight: number = size.height - this.tabs.length * Settings.TOOLKIT_TAB_HEIGHT_PX;
             const getClassName = (baseClass: string) => classNames(
                 baseClass,
@@ -101,38 +89,11 @@ class LabelsToolkit extends React.Component<IProps, IState> {
                 }
             );
 
-            const header =
-                <div
-                    key={"Header_" + index}
-                    className={getClassName("Header")}
-                    onClick={() => this.headerClickHandler(labelType)}
-                    style={{height: Settings.TOOLKIT_TAB_HEIGHT_PX}}
-                >
-                    <div className="Marker"/>
-                    <div className="HeaderGroupWrapper">
-                        <img
-                            draggable={false}
-                            className="Ico"
-                            src={tabData.imageSrc}
-                            alt={tabData.imageAlt}
-                        />
-                        {tabData.headerText}
-                    </div>
-                    <div className="HeaderGroupWrapper">
-                        <img
-                            draggable={false}
-                            className="Arrow"
-                            src={"ico/down.png"}
-                            alt={"down_arrow"}
-                        />
-                    </div>
-                </div>;
-
-        const content =
+            const content =
                 <div
                     key={"Content_" + index}
                     className={getClassName("Content")}
-                    style={{height: isActive ? activeTabContentHeight : 0}}
+                    style={{ height: isActive ? activeTabContentHeight : 0 }}
                 >
                     {labelType === LabelType.RECT && <RectLabelsList
                         size={{
@@ -141,16 +102,17 @@ class LabelsToolkit extends React.Component<IProps, IState> {
                         }}
                         imageData={imagesData[activeImageIndex]}
                     />}
-                    
+
                 </div>;
 
-            children.push([header, content]);
+            children.push([content]);
             return children;
         }, [])
     };
 
     public render() {
-        return(
+
+        return (
             <div
                 className="LabelsToolkit"
                 ref={ref => this.labelsToolkitRef = ref}
